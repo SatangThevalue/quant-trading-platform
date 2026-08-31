@@ -15,6 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 # Configure MLflow Local Storage
 mlruns_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "mlruns")
+os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
 mlflow.set_tracking_uri(f"file://{mlruns_path}")
 
 def load_feature_data(symbol="EURUSD"):
@@ -32,7 +33,7 @@ def load_feature_data(symbol="EURUSD"):
 
 def train_and_optimize(df, symbol="EURUSD"):
     # Drop columns not used for training
-    drop_cols = ["id", "asset_id", "timeframe", "timestamp", "target", "source", "symbol", "date", "datetime"]
+    drop_cols = ["id", "asset_id", "timeframe", "timestamp", "target", "source", "symbol", "date", "datetime", "created_at"]
     features = [c for c in df.columns if c not in drop_cols]
     
     X = df[features]

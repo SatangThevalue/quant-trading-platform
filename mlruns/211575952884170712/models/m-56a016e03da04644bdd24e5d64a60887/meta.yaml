@@ -1,0 +1,11 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/211575952884170712/models/m-56a016e03da04644bdd24e5d64a60887/artifacts
+creation_timestamp: 1788218043332
+experiment_id: '211575952884170712'
+last_updated_timestamp: 1788218043332
+lifecycle_stage: active
+model_id: m-56a016e03da04644bdd24e5d64a60887
+model_type: null
+name: model
+source_run_id: 651f0f1aca744e10bdbe5345e36cbd42
+status: 1
+status_message: null

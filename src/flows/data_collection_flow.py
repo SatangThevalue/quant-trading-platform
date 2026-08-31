@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 from src.config.database import engine
 
 @task(retries=3, retry_delay_seconds=10)
-def fetch_market_data(symbol="EURUSD=X", period="1y", interval="1d"):
+def fetch_market_data(symbol="EURUSD=X", period="5y", interval="1d"):
     """Fetch market data from yfinance."""
     logger.info(f"Task: Fetching data for {symbol} ({period} / {interval})...")
     df = yf.download(symbol, period=period, interval=interval, progress=False)
@@ -102,7 +102,7 @@ def run_data_collection_pipeline():
     
     for sym in symbols:
         # 1. Fetch
-        df = fetch_market_data(symbol=sym, period="1y", interval="1d")
+        df = fetch_market_data(symbol=sym, period="5y", interval="1d")
         
         # 2. Save to Lake
         save_raw_data_to_lake(df, sym, "1d")

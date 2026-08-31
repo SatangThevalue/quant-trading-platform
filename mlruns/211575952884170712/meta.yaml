@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/211575952884170712
+creation_time: 1788214709687
+effective_trace_archival_retention: null
+experiment_id: '211575952884170712'
+last_update_time: 1788214709687
+lifecycle_stage: active
+name: EURUSD_LGBM_DIRECTION_V1
+trace_location: null
+workspace: default

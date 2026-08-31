@@ -9,7 +9,7 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from src.config.database import engine
 
-def fetch_and_save_data(symbol="EURUSD=X", period="1y", interval="1d"):
+def fetch_and_save_data(symbol="EURUSD=X", period="5y", interval="1d"):
     """Fetch market data from yfinance and save to database."""
     logger.info(f"Fetching data for {symbol} ({period} / {interval})...")
     
@@ -81,5 +81,5 @@ def fetch_and_save_data(symbol="EURUSD=X", period="1y", interval="1d"):
         logger.info(f"Saved {len(db_df)} rows to Database table: market_ohlcv")
 
 if __name__ == "__main__":
-    fetch_and_save_data(symbol="EURUSD=X", period="1y", interval="1d")
-    fetch_and_save_data(symbol="GC=F", period="1y", interval="1d")  # Gold
+    fetch_and_save_data(symbol="EURUSD=X", period="5y", interval="1d")
+    fetch_and_save_data(symbol="GC=F", period="5y", interval="1d")  # Gold
