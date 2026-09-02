@@ -65,7 +65,7 @@ def run_feature_engineering_pipeline():
     """Main Orchestration Flow for Feature Engineering"""
     logger.info("Starting Feature Engineering Pipeline...")
     
-    symbols = ["EURUSD", "GBPUSD", "GCF"]
+    symbols = ["EURUSD", "GBPUSD", "GCF", "JPY", "AUDUSD"]
     
     for sym in symbols:
         raw_df = load_raw_data_from_db(symbol=sym, timeframe="1d")

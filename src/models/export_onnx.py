@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import lightgbm as lgb
 from onnxmltools import convert_lightgbm
-from skl2onnx.common.data_types import FloatTensorType
+from onnxmltools.convert.common.data_types import FloatTensorType
 import onnxruntime as rt
 from loguru import logger
 

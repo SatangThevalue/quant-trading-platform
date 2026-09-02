@@ -7,7 +7,7 @@ from src.flows.feature_engineering_flow import load_raw_data_from_db, apply_feat
 
 if __name__ == "__main__":
     print("Running Feature Engineering directly (bypassing Prefect Daemon)...")
-    symbols = ["EURUSD", "GCF"]
+    symbols = ["EURUSD", "GBPUSD", "JPY", "AUDUSD"]
     
     for sym in symbols:
         # 1. Load Data

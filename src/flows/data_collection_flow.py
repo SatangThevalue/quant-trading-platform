@@ -98,7 +98,7 @@ def run_data_collection_pipeline():
     """Main Orchestration Flow for Data Collection"""
     logger.info("Starting Market Data Collection Pipeline...")
     
-    symbols = ["EURUSD=X", "GBPUSD=X", "GC=F"] # EUR, GBP, Gold
+    symbols = ["EURUSD=X", "GBPUSD=X", "GC=F", "JPY=X", "AUDUSD=X"] # EUR, GBP, Gold, JPY, AUD
     
     for sym in symbols:
         # 1. Fetch

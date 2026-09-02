@@ -131,7 +131,7 @@ def train_and_optimize(df, symbol="EURUSD"):
         logger.info(f"Successfully logged model and metrics to MLflow. Accuracy: {acc:.4f}, F1: {f1:.4f}")
 
 if __name__ == "__main__":
-    for sym in ["EURUSD", "GCF"]:
+    for sym in ["EURUSD", "GBPUSD", "JPY", "AUDUSD"]:
         logger.info(f"--- Processing {sym} ---")
         df = load_feature_data(sym)
         if df is not None:
