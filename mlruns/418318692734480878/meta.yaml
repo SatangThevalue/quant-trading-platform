@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/418318692734480878
+creation_time: 1788353558847
+effective_trace_archival_retention: null
+experiment_id: '418318692734480878'
+last_update_time: 1788353558847
+lifecycle_stage: active
+name: PREFECT_EURUSD
+trace_location: null
+workspace: default

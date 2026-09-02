@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/351493593806745334
+creation_time: 1788352558818
+effective_trace_archival_retention: null
+experiment_id: '351493593806745334'
+last_update_time: 1788352558818
+lifecycle_stage: active
+name: FULL_LOOP_EURUSD
+trace_location: null
+workspace: default

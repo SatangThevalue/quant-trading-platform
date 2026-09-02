@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/411211457230708543
+creation_time: 1788352581415
+effective_trace_archival_retention: null
+experiment_id: '411211457230708543'
+last_update_time: 1788352581415
+lifecycle_stage: active
+name: FULL_LOOP_GBPUSD
+trace_location: null
+workspace: default

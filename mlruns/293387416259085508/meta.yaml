@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/293387416259085508
+creation_time: 1788352568954
+effective_trace_archival_retention: null
+experiment_id: '293387416259085508'
+last_update_time: 1788352568954
+lifecycle_stage: active
+name: FULL_LOOP_USDCHF
+trace_location: null
+workspace: default

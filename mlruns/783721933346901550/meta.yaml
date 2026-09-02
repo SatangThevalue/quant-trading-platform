@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/783721933346901550
+creation_time: 1788351785161
+effective_trace_archival_retention: null
+experiment_id: '783721933346901550'
+last_update_time: 1788351785161
+lifecycle_stage: active
+name: USDCHF_V2_INTRADAY
+trace_location: null
+workspace: default

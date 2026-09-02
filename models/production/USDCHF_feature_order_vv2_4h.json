@@ -1,0 +1,28 @@
+{
+    "feature_version": "FS_Vv2_4h",
+    "symbol": "USDCHF",
+    "features": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "ret_1",
+        "ret_5",
+        "ret_10",
+        "ret_20",
+        "ret_50",
+        "body_size",
+        "ema20",
+        "ema50",
+        "ema200",
+        "ema20_50_gap",
+        "ema50_200_gap",
+        "rsi14",
+        "rsi_distance_50",
+        "atr14",
+        "atr100",
+        "atr_ratio",
+        "trend_volatility_interaction"
+    ]
+}

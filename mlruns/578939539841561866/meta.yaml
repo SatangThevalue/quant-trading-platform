@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/578939539841561866
+creation_time: 1788351781255
+effective_trace_archival_retention: null
+experiment_id: '578939539841561866'
+last_update_time: 1788351781255
+lifecycle_stage: active
+name: EURUSD_V2_INTRADAY
+trace_location: null
+workspace: default
