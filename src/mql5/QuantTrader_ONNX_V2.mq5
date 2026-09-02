@@ -22,7 +22,7 @@ input  bool     InpEnableONNX     = true;
 input  double   InpRiskPercent    = 1.0;  // Fallback Risk %
 
 // ------------------------------------------------------------------
-// 2. DYNAMIC CONFIGURATION VARIABLES
+// 2. GLOBAL VARIABLES & HANDLES
 // ------------------------------------------------------------------
 long   onnx_handle = INVALID_HANDLE;
 
@@ -38,8 +38,58 @@ int    atr_handle  = INVALID_HANDLE;
 int    rsi_handle  = INVALID_HANDLE;
 double atr_buffer[];
 
+// Logging File Handle
+int    log_handle  = INVALID_HANDLE;
+
 // ------------------------------------------------------------------
-// 3. JSON LOADER FUNCTION
+// 3. LOGGER UTILITY
+// ------------------------------------------------------------------
+void LogMsg(string message)
+  {
+   // 1. Print to Experts Log
+   Print(message);
+   
+   // 2. Write to physical .log file
+   if(log_handle != INVALID_HANDLE)
+     {
+      string time_str = TimeToString(TimeCurrent(), TIME_DATE|TIME_SECONDS);
+      FileWrite(log_handle, time_str + " | " + message);
+      FileFlush(log_handle); // Ensure it's written immediately
+     }
+  }
+
+void InitLogger()
+  {
+   string filename = "QuantTrader_" + _Symbol + "_" + TimeToString(TimeLocal(), TIME_DATE) + ".log";
+   StringReplace(filename, ".", "");
+   // Open file for appending text
+   log_handle = FileOpen(filename, FILE_WRITE|FILE_READ|FILE_TXT|FILE_ANSI);
+   
+   if(log_handle != INVALID_HANDLE)
+     {
+      FileSeek(log_handle, 0, SEEK_END);
+      LogMsg("=================================================");
+      LogMsg("EA STARTING / INITIALIZED");
+      LogMsg("=================================================");
+     }
+   else
+     {
+      Print("WARNING: Failed to create log file: ", filename);
+     }
+  }
+
+void CloseLogger()
+  {
+   if(log_handle != INVALID_HANDLE)
+     {
+      LogMsg("EA SHUTDOWN.");
+      FileClose(log_handle);
+      log_handle = INVALID_HANDLE;
+     }
+  }
+
+// ------------------------------------------------------------------
+// 4. JSON LOADER FUNCTION
 // ------------------------------------------------------------------
 bool LoadConfiguration()
   {
@@ -101,39 +151,44 @@ string ReadFile(string file_path)
   }
 
 // ------------------------------------------------------------------
-// 4. INITIALIZATION (OnInit)
+// 5. INITIALIZATION (OnInit)
 // ------------------------------------------------------------------
 int OnInit()
   {
-   Print("Initializing Dynamic QuantTrader ONNX EA...");
+   InitLogger();
+   LogMsg("Initializing Dynamic QuantTrader ONNX EA...");
    
    // 1. Load Dynamic Configuration from JSON
    if(!LoadConfiguration())
      {
-      Print("CRITICAL: Failed to load JSON configs. Halting EA.");
+      LogMsg("CRITICAL: Failed to load JSON configs. Halting EA.");
       return(INIT_FAILED);
      }
      
    if(num_features <= 0)
      {
-      Print("CRITICAL: num_features is 0. Check feature_order.json.");
+      LogMsg("CRITICAL: num_features is 0. Check feature_order.json.");
       return(INIT_FAILED);
      }
    
    atr_handle = iATR(_Symbol, PERIOD_D1, 14);
-   if(atr_handle == INVALID_HANDLE) return(INIT_FAILED);
+   if(atr_handle == INVALID_HANDLE) 
+     {
+      LogMsg("Error: Failed to get ATR handle.");
+      return(INIT_FAILED);
+     }
    ArraySetAsSeries(atr_buffer, true);
 
    if(InpEnableONNX)
      {
-      PrintFormat("ONNX System Ready. Model requires %d features.", num_features);
+      LogMsg(StringFormat("ONNX System Ready. Model requires %d features.", num_features));
      }
 
    return(INIT_SUCCEEDED);
   }
 
 // ------------------------------------------------------------------
-// 5. DEINITIALIZATION (OnDeinit)
+// 6. DEINITIALIZATION (OnDeinit)
 // ------------------------------------------------------------------
 void OnDeinit(const int reason)
   {
@@ -143,10 +198,11 @@ void OnDeinit(const int reason)
       onnx_handle = INVALID_HANDLE;
      }
    IndicatorRelease(atr_handle);
+   CloseLogger();
   }
 
 // ------------------------------------------------------------------
-// 6. MAIN EXECUTION LOOP (OnTick)
+// 7. MAIN EXECUTION LOOP (OnTick)
 // ------------------------------------------------------------------
 void OnTick()
   {
@@ -154,42 +210,59 @@ void OnTick()
    datetime current_time = iTime(_Symbol, PERIOD_D1, 0);
    if(current_time == last_time) return; 
    
-   // --- DYNAMIC FEATURE ARRAY ---
-   // We now allocate the array dynamically based on the JSON!
+   // --- A. RISK LAYER: Spread Filter ---
+   long current_spread = SymbolInfoInteger(_Symbol, SYMBOL_SPREAD);
+   if(current_spread > InpMaxSpread) 
+     {
+      LogMsg(StringFormat("Rejected: Spread too high (%d > %d)", current_spread, InpMaxSpread));
+      return;
+     }
+
+   // --- B. FEATURE LAYER ---
    float features[];
    ArrayResize(features, num_features);
    
    // (Feature Generation Logic Here to fill the array...)
    // ...
    
-   if(!ValidateFeatures(features)) return;
+   if(!ValidateFeatures(features)) 
+     {
+      LogMsg("Invalid Features Detected (NaN/INF). NO TRADE.");
+      return;
+     }
 
-   // --- ONNX INFERENCE LAYER ---
+   // --- C. ONNX INFERENCE LAYER ---
    float probability_buy = 0.5; 
    if(InpEnableONNX && onnx_handle != INVALID_HANDLE)
      {
       vectorf output_data(1);
       // bool success = OnnxRun(onnx_handle, ONNX_NO_CONVERSION, features, output_data);
       // if(success) probability_buy = output_data[0];
+      // else LogMsg(StringFormat("ONNX Inference Error: %d", GetLastError()));
      }
      
-   // --- SIGNAL LAYER (Using Dynamic Thresholds) ---
+   // --- D. SIGNAL LAYER (Using Dynamic Thresholds) ---
    int signal = 0;
    if(probability_buy >= buy_threshold) signal = 1;
    else if(probability_buy <= sell_threshold) signal = -1;
    
-   if(signal == 0) return;
+   if(signal == 0) 
+     {
+      // Optional: LogMsg(StringFormat("Prob: %.2f (No Signal)", probability_buy));
+      return;
+     }
 
-   // --- POSITION SIZING ENGINE ---
+   // --- E. POSITION SIZING ENGINE ---
    double sl_points = CalculateATRStopLoss();
    double volume = CalculateLotSize(sl_points);
    
    last_time = current_time; 
+   LogMsg(StringFormat("Signal Detected! Dir: %d | Prob: %.2f", signal, probability_buy));
    ExecuteTrade(signal, volume, sl_points);
   }
 
 // ------------------------------------------------------------------
-// 7. HELPER FUNCTIONS 
+// 8. HELPER FUNCTIONS 
 // ------------------------------------------------------------------
 
 bool ValidateFeatures(float &features_array[])
