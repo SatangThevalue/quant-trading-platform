@@ -181,6 +181,12 @@ int OnInit()
 
    if(InpEnableONNX)
      {
+      onnx_handle = OnnxCreate(InpModelPath, ONNX_DEFAULT);
+      if(onnx_handle == INVALID_HANDLE)
+        {
+         LogMsg(StringFormat("CRITICAL: Failed to load ONNX model from %s. Error: %d", InpModelPath, GetLastError()));
+         return(INIT_FAILED);
+        }
       LogMsg(StringFormat("ONNX System Ready. Model requires %d features.", num_features));
      }
 
@@ -236,9 +242,9 @@ void OnTick()
    if(InpEnableONNX && onnx_handle != INVALID_HANDLE)
      {
       vectorf output_data(1);
-      // bool success = OnnxRun(onnx_handle, ONNX_NO_CONVERSION, features, output_data);
-      // if(success) probability_buy = output_data[0];
-      // else LogMsg(StringFormat("ONNX Inference Error: %d", GetLastError()));
+      bool success = OnnxRun(onnx_handle, ONNX_NO_CONVERSION, features, output_data);
+      if(success) probability_buy = output_data[0];
+      else LogMsg(StringFormat("ONNX Inference Error: %d", GetLastError()));
      }
      
    // --- D. SIGNAL LAYER (Using Dynamic Thresholds) ---
