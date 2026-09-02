@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/902857868439108879
+creation_time: 1788392528249
+effective_trace_archival_retention: null
+experiment_id: '902857868439108879'
+last_update_time: 1788392528249
+lifecycle_stage: active
+name: FULL_LOOP_BTC
+trace_location: null
+workspace: default

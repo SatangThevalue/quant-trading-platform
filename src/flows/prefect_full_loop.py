@@ -1,9 +1,11 @@
 import sys
 import os
 
-# HARD DISABLE PREFECT DAEMON FOR LOCAL VPS HARDWARE
+# Prevent Prefect from booting ephemeral server on VPS which times out
 os.environ["PREFECT_API_URL"] = ""
 os.environ["PREFECT_LOCAL_STORAGE_PATH"] = os.path.join(os.getcwd(), ".prefect")
+# Disable Prefect tracking temporarily if running on constrained VPS
+os.environ["PREFECT_LOGGING_LEVEL"] = "WARNING"
 
 import yfinance as yf
 import pandas as pd
@@ -172,6 +174,7 @@ def process_single_asset_tf(asset_name, ticker, tf_name, tf_config):
 @flow(name="Master Quant Platform Full Loop", task_runner=ThreadPoolTaskRunner(max_workers=1))
 def prefect_full_loop_orchestrator():
     """Main Orchestrator Flow: Loops through all assets and timeframes sequentially to prevent SQLite locks on VPS."""
+    logger.warning("Running without Prefect Cloud connection (Offline Local Mode)")
     all_results = []
     
     for asset_name, ticker in ASSETS.items():

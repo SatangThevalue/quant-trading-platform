@@ -1,0 +1,10 @@
+{
+    "model_version": "Vv2_30m",
+    "symbol": "GOLD",
+    "buy_threshold": 0.75,
+    "sell_threshold": 0.25,
+    "risk_percent": 1.0,
+    "atr_sl": 1.5,
+    "atr_tp": 3.0,
+    "export_date": "2026-09-03T06:42:06.465331"
+}

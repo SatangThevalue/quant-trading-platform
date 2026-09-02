@@ -1,0 +1,14 @@
+artifact_uri: file:///home/thaieasyvps/quant-trading-platform/mlruns/293387416259085508/38ed93674f37457689a3b4e1cd911d7b/artifacts
+end_time: 1788392469133
+entry_point_name: ''
+experiment_id: '293387416259085508'
+lifecycle_stage: active
+run_id: 38ed93674f37457689a3b4e1cd911d7b
+run_name: Model_1d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1788392467819
+status: 3
+tags: []
+user_id: thaieasyvps
