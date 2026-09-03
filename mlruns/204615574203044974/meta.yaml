@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/204615574203044974
+creation_time: 1788403630357
+effective_trace_archival_retention: null
+experiment_id: '204615574203044974'
+last_update_time: 1788403630357
+lifecycle_stage: active
+name: V3_USDJPY
+trace_location: null
+workspace: default

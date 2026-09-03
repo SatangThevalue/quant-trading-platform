@@ -1,0 +1,22 @@
+2026-09-03 09:49:16.701 | INFO     | __main__:run_v3_pipeline:32 - =========================================
+2026-09-03 09:49:16.701 | INFO     | __main__:run_v3_pipeline:33 - 🚀 STARTING V3 ASSET-SPECIFIC PIPELINE
+2026-09-03 09:49:16.701 | INFO     | __main__:run_v3_pipeline:34 - =========================================
+2026-09-03 09:49:16.701 | INFO     | __main__:run_v3_pipeline:38 - --- Processing EURUSD (V3 Architecture) ---
+2026-09-03 09:49:24.634 | INFO     | __main__:run_v3_pipeline:38 - --- Processing USDCHF (V3 Architecture) ---
+2026-09-03 09:49:28.129 | INFO     | __main__:run_v3_pipeline:38 - --- Processing GBPUSD (V3 Architecture) ---
+2026-09-03 09:49:31.564 | INFO     | __main__:run_v3_pipeline:38 - --- Processing USDJPY (V3 Architecture) ---
+2026-09-03 09:49:36.454 | INFO     | __main__:run_v3_pipeline:38 - --- Processing GOLD (V3 Architecture) ---
+2026/09/03 09:50:03 INFO mlflow.tracking.fluent: Experiment with name 'V3_GOLD' does not exist. Creating a new experiment.
+2026-09-03 09:50:10.451 | INFO     | __main__:run_v3_pipeline:38 - --- Processing BTC (V3 Architecture) ---
+2026/09/03 09:50:11 INFO mlflow.tracking.fluent: Experiment with name 'V3_BTC' does not exist. Creating a new experiment.
+
+=== V3 ASSET-SPECIFIC PORTFOLIO REPORT ===
+| Asset   |   BaseTrades |   FilteredTrades | WinRate   |   ProfitFactor |   Sharpe | MaxDD   | NetReturn   |
+|:--------|-------------:|-----------------:|:----------|---------------:|---------:|:--------|:------------|
+| EURUSD  |         1103 |              963 | 37.7%     |           0.66 |   -20.13 | -14.3%  | -11.5%      |
+| USDCHF  |          904 |              628 | 48.6%     |           1.15 |     6.57 | -12.4%  | 4.6%        |
+| GBPUSD  |         1110 |             1108 | 43.4%     |           0.68 |   -19.8  | -16.9%  | -12.0%      |
+| USDJPY  |          966 |              797 | 47.4%     |           0.74 |   -15.92 | -13.7%  | -8.9%       |
+| GOLD    |          918 |              841 | 33.9%     |           0.44 |   -46.99 | -76.2%  | -72.7%      |
+| BTC     |          919 |              473 | 38.7%     |           0.75 |   -16.59 | -44.6%  | -28.6%      |
+2026-09-03 09:50:18.259 | INFO     | __main__:run_v3_pipeline:162 - ✅ V3 Pipeline Complete. Report saved to docs/V3_PERFORMANCE_REPORT.md

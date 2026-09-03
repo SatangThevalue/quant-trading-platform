@@ -1,0 +1,14 @@
+artifact_uri: file:///home/thaieasyvps/quant-trading-platform/mlruns/168772144056274446/917c0b19e05e41c6a41446d01fe5189d/artifacts
+end_time: 1788403612769
+entry_point_name: ''
+experiment_id: '168772144056274446'
+lifecycle_stage: active
+run_id: 917c0b19e05e41c6a41446d01fe5189d
+run_name: Meta_Labeling_15m
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1788403604672
+status: 3
+tags: []
+user_id: thaieasyvps

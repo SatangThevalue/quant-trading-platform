@@ -1,0 +1,9 @@
+artifact_location: file:///home/thaieasyvps/quant-trading-platform/mlruns/681746377921699721
+creation_time: 1788403803801
+effective_trace_archival_retention: null
+experiment_id: '681746377921699721'
+last_update_time: 1788403803801
+lifecycle_stage: active
+name: V3_GOLD
+trace_location: null
+workspace: default
