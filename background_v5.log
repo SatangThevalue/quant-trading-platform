@@ -1,0 +1,20 @@
+2026-09-03 18:54:11.871 | INFO     | __main__:<module>:22 - Fetching Macro Data...
+2026-09-03 18:54:11.872 | INFO     | src.features.advanced_alpha_factory:fetch_macro_data:12 - Fetching Macro Data (DXY and US10Y Yield)...
+2026-09-03 18:54:13.755 | INFO     | __main__:<module>:25 - Training V5 Models for Underperforming Assets...
+2026-09-03 18:54:13.755 | INFO     | __main__:<module>:29 - --- Processing GBPUSD ---
+2026-09-03 18:54:14.733 | INFO     | src.features.advanced_alpha_factory:build_advanced_features:89 - Integrated Macro Features into GBPUSD
+2026-09-03 18:54:19.967 | INFO     | __main__:<module>:29 - --- Processing USDJPY ---
+2026-09-03 18:54:20.764 | INFO     | src.features.advanced_alpha_factory:build_advanced_features:89 - Integrated Macro Features into USDJPY
+2026-09-03 18:54:24.806 | INFO     | __main__:<module>:29 - --- Processing GOLD ---
+2026-09-03 18:54:25.892 | INFO     | src.features.advanced_alpha_factory:build_advanced_features:89 - Integrated Macro Features into GOLD
+2026-09-03 18:54:25.894 | INFO     | src.features.advanced_alpha_factory:apply_asymmetric_barrier:37 - Applying Asymmetric Barrier (TP=3.0x, SL=1.0x)
+2026-09-03 18:54:51.074 | INFO     | __main__:<module>:29 - --- Processing BTC ---
+2026-09-03 18:54:56.916 | INFO     | src.features.advanced_alpha_factory:apply_asymmetric_barrier:37 - Applying Asymmetric Barrier (TP=4.0x, SL=1.5x)
+
+=== V5 ADVANCED ALPHA PERFORMANCE (Underperformers Rescue) ===
+| Asset   |   Trades | WinRate   |   ProfitFactor |   Sharpe | MaxDD   |
+|:--------|---------:|:----------|---------------:|---------:|:--------|
+| GBPUSD  |      150 | 50.0%     |            1.2 |     4.74 | -5.1%   |
+| USDJPY  |        5 | 100.0%    |          inf   |   216.11 | 0.0%    |
+| GOLD    |        0 | 0.0%      |            0   |     0    | 0.0%    |
+| BTC     |      254 | 0.0%      |          inf   |     0    | 0.0%    |
